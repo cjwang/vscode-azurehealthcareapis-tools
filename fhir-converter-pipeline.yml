@@ -23,7 +23,7 @@ steps:
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: 'Microsoft.Health.Fhir.Liquid.Converter.Tool**.nupkg'
+    archiveFilePatterns: 'microsoft.health.fhir.liquid.converter.tool**.nupkg'
     destinationFolder: '$(basicPath)/client/engine-temp'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
