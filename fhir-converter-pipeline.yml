@@ -19,9 +19,26 @@ steps:
     view: 'bc74ab73-12fe-436f-acab-b9b1975d94b1'
     definition: '81504d36-f00a-44b5-9e3f-99a013a5d2ff'
     version: 'latest'
-    downloadPath: '$(basicPath)/client'
+    downloadPath: '$(basicPath)/client/engine-temp'
 
+- bash: |
+    echo ">>> Moving files:"
+    if [ ! -d "engine" ]; then
+      mkdir engine
+    else
+      rm -r engine/*
+    fi
+    mv engine-temp/contentFiles/any/netcoreapp**/Microsoft.Health.Fhir.Liquid.Converter.Tool/* engine/
+    rm -r nuget engine-temp
+  workingDirectory: '$(basicPath)/client'
+  displayName: 'Move files'
 
+- bash: |
+    echo ">>> Testing project:"
+    npm run test
+  workingDirectory: '$(basicPath)'
+  displayName: 'Run tests'
+  condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows'))
 
 - bash: |
     echo ">>> Packaging project:"
