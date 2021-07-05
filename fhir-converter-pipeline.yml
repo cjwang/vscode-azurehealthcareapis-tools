@@ -23,7 +23,7 @@ steps:
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: 'microsoft.health.fhir.liquid.converter.tool**.nupkg'
+    archiveFilePatterns: '**/microsoft.health.fhir.liquid.converter.tool**.nupkg'
     destinationFolder: '$(basicPath)/client/engine-temp'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
@@ -38,7 +38,7 @@ steps:
     fi
     mv engine-temp/contentFiles/any/netcoreapp**/Microsoft.Health.Fhir.Liquid.Converter.Tool/* engine/
     rm -r nuget engine-temp
-  workingDirectory: '$(basicPath)/FHIR-Converter/client'
+  workingDirectory: '$(basicPath)/client'
   displayName: 'Move files'
 
 - bash: |
