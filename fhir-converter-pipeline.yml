@@ -12,7 +12,7 @@ steps:
   workingDirectory: '$(basicPath)'
 
 - task: DownloadPackage@1
-  displayName: Download dependencies
+  displayName: Download FhirConverter tool
   inputs:
     packageType: 'nuget'
     feed: '3ec5df0c-1a0f-4dd5-92db-9a0b3fe70714/5236fe62-97b1-415e-9493-bc8689f538d3'
@@ -29,7 +29,7 @@ steps:
       rm -r engine/*
     fi
     mv engine-temp/contentFiles/any/netcoreapp**/Microsoft.Health.Fhir.Liquid.Converter.Tool/* engine/
-    rm -r nuget engine-temp
+    rm -r engine-temp
   workingDirectory: '$(basicPath)/client'
   displayName: 'Move files'
 
