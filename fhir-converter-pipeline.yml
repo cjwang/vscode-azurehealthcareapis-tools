@@ -21,32 +21,7 @@ steps:
     version: 'latest'
     downloadPath: '$(basicPath)/client'
 
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: '**/microsoft.health.fhir.liquid.converter.tool**.nupkg'
-    destinationFolder: '$(basicPath)/client/engine-temp'
-    cleanDestinationFolder: true
-    overwriteExistingFiles: false
-  displayName: 'Extract artifact'
 
-- bash: |
-    echo ">>> Moving files:"
-    if [ ! -d "engine" ]; then
-      mkdir engine
-    else
-      rm -r engine/*
-    fi
-    mv engine-temp/contentFiles/any/netcoreapp**/Microsoft.Health.Fhir.Liquid.Converter.Tool/* engine/
-    rm -r nuget engine-temp
-  workingDirectory: '$(basicPath)/client'
-  displayName: 'Move files'
-
-- bash: |
-    echo ">>> Testing project:"
-    npm run test
-  workingDirectory: '$(basicPath)'
-  displayName: 'Run tests'
-  condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows'))
 
 - bash: |
     echo ">>> Packaging project:"
