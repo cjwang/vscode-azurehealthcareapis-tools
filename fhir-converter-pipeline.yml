@@ -11,16 +11,14 @@ steps:
   displayName: Install dependencies
   workingDirectory: $(basicPath)
 
-- task: DownloadPipelineArtifact@2
+- task: DownloadPackage@1
   inputs:
-    buildType: 'specific'
-    project: '3ec5df0c-1a0f-4dd5-92db-9a0b3fe70714'
-    definition: '48'
-    buildVersionToDownload: 'latestFromBranch'
-    branchName: refs/heads/main
-    itemPattern: 'nuget/Microsoft.Health.Fhir.Liquid.Converter.Tool**'
-    targetPath: $(Build.SourcesDirectory)/FHIR-Converter/client
-  displayName: Download FhirConverter artifact
+    packageType: 'nuget'
+    feed: '3ec5df0c-1a0f-4dd5-92db-9a0b3fe70714/5236fe62-97b1-415e-9493-bc8689f538d3'
+    view: 'bc74ab73-12fe-436f-acab-b9b1975d94b1'
+    definition: '81504d36-f00a-44b5-9e3f-99a013a5d2ff'
+    version: 'latest'
+    downloadPath: '$(Build.SourcesDirectory)/FHIR-Converter/client'
 
 - task: ExtractFiles@1
   inputs:
