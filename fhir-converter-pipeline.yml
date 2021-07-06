@@ -11,15 +11,14 @@ steps:
   displayName: 'Install dependencies'
   workingDirectory: '$(basicPath)'
 
-- task: DownloadPackage@1
-  displayName: Download FhirConverter tool
+- task: UniversalPackages@0
   inputs:
-    packageType: 'nuget'
-    feed: '3ec5df0c-1a0f-4dd5-92db-9a0b3fe70714/5236fe62-97b1-415e-9493-bc8689f538d3'
-    view: 'bc74ab73-12fe-436f-acab-b9b1975d94b1'
-    definition: '81504d36-f00a-44b5-9e3f-99a013a5d2ff'
+    command: 'download'
+    downloadDirectory: '$(basicPath)/client/engine-temp'
+    feedsToUse: 'external'
+    feedDownloadExternal: '3ec5df0c-1a0f-4dd5-92db-9a0b3fe70714/5236fe62-97b1-415e-9493-bc8689f538d3'
+    packageDownloadExternal: '81504d36-f00a-44b5-9e3f-99a013a5d2ff'
     version: 'latest'
-    downloadPath: '$(basicPath)/client/engine-temp'
 
 - bash: |
     echo ">>> Moving files:"
