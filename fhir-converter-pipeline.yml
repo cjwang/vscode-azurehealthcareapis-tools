@@ -38,7 +38,7 @@ steps:
     npm run test
   workingDirectory: '$(basicPath)'
   displayName: 'Run tests'
-  condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows'))
+  condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows_NT'))
 
 - bash: |
     echo ">>> Packaging project:"
